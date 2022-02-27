@@ -1,0 +1,56 @@
+acces :		The access() function checks to see if the file or directory specified by path exists and if it can 
+			be accessed with the file access permissions given by amode. However, unlike other functions 
+			(open() for example), it uses the real user ID and real group ID in place of the effective user and group IDs.
+
+open :		Open the fd entered in different mode (read/write or both)
+
+unlink :	The unlink function deletes the file name filename . If this is a file's sole name, the file itself is also deleted.
+			(Actually, if any process has the file open when this happens, deletion is postponed until all processes have closed
+			the file.) The function unlink is declared in the header file unistd.
+
+close :		Close the fd openned.
+
+read :		Read in the fd entered.
+
+write :		Write on the fd entered.
+
+malloc :	Allocate memory on the stack.
+
+waitpid :	The waitpid() system call suspends execution of the current process until a child specified by pid argument has changed state.
+			By default, waitpid() waits only for terminated children, but this behaviour is modifiable via the options argument, as described
+			below.
+
+wait :		A call to wait() blocks the calling process until one of its child processes exits or a signal is received. After child process
+			terminates, parent continues its execution after wait system call instruction.
+
+free :		Free memory on the stack.
+
+pipe :		pipe() creates a pipe, a unidirectional data channel that can be used for interprocess communication.  The ar‐
+			ray pipefd is used to return two file descriptors referring to the ends of the pipe.  pipefd[0] refers to  the
+			read  end  of  the pipe.  pipefd[1] refers to the write end of the pipe.  Data written to the write end of the
+			pipe is buffered by the kernel until it is read from the read end of  the  pipe.   For  further  details,  see
+			pipe(7).
+
+dup :		The dup() system call creates a copy of a file descriptor.
+
+dup2 :		The dup2() system function is used to create a copy of an existing file descriptor. In Linux, there are 3
+			standard file descriptors. They are: stdin: This is the standard input file descriptor.
+
+execve :	The execve() function replaces the current process image with a new process image specified by path . The new image
+			is constructed from a regular, executable file called the new process image file. No return is made because the calling
+			process image is replaced by the new process image.
+
+fork :		Fork system call is used for creating a new process, which is called child process, which runs concurrently with the
+			process that makes the fork() call (parent process). After a new child process is created, both processes will execute
+			the next instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers,
+			same open files which use in the parent process. It takes no parameters and returns an integer value.
+
+perror :	The POSIX error function, perror, is used in C and C++ to print an error message to stderr, based on the error state
+			stored in errno.It prints str and an implementation-defined error message corresponding to the global variable errno.
+
+strerror :	The C library function char *strerror(int errnum) searches an internal array for the error number errnum and returns
+			a pointer to an error message string. The error strings produced by strerror depend on the developing platform and compiler.
+
+exit :		The C library function void exit(int status) terminates the calling process immediately. Any open file descriptors belonging
+			to the process are closed and any children of the process are inherited by process 1, init, and the process parent is sent a
+			SIGCHLD signal.
