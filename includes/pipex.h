@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/02/28 08:52:46 by aguay            ###   ########.fr       */
+/*   Updated: 2022/02/28 13:10:42 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "pipex.h"
-
-int	main(int argc, char **argv)
-{
-	if (argc > 1)
-		return (0);
-	if (!argv[0])
-		return (0);
-	ft_printf("Hello World!\n");
-}
+#ifndef PIPIEX_H
+# define PIPEX_H
+	#include <sys/wait.h>
+#endif

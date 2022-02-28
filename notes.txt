@@ -19,6 +19,7 @@ malloc :	Allocate memory on the stack.
 waitpid :	The waitpid() system call suspends execution of the current process until a child specified by pid argument has changed state.
 			By default, waitpid() waits only for terminated children, but this behaviour is modifiable via the options argument, as described
 			below.
+			https://www.youtube.com/watch?v=kCGaRdArSnA
 
 wait :		A call to wait() blocks the calling process until one of its child processes exits or a signal is received. After child process
 			terminates, parent continues its execution after wait system call instruction.
@@ -44,6 +45,7 @@ fork :		Fork system call is used for creating a new process, which is called chi
 			process that makes the fork() call (parent process). After a new child process is created, both processes will execute
 			the next instruction following the fork() system call. A child process uses the same pc(program counter), same CPU registers,
 			same open files which use in the parent process. It takes no parameters and returns an integer value.
+			https://www.youtube.com/watch?v=cex9XrZCU14
 
 perror :	The POSIX error function, perror, is used in C and C++ to print an error message to stderr, based on the error state
 			stored in errno.It prints str and an implementation-defined error message corresponding to the global variable errno.
