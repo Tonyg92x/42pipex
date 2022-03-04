@@ -21,6 +21,9 @@ waitpid :	The waitpid() system call suspends execution of the current process un
 			below.
 			https://www.youtube.com/watch?v=kCGaRdArSnA
 
+			The difference between dup and dup2 is that dup assigns the lowest available file descriptor number, while dup2 lets you choose
+			the file descriptor number that will be assigned and atomically closes and replaces it if it's already taken.
+
 wait :		A call to wait() blocks the calling process until one of its child processes exits or a signal is received. After child process
 			terminates, parent continues its execution after wait system call instruction.
 
