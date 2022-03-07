@@ -6,7 +6,7 @@
 #    By: aguay <aguay@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/31 08:51:26 by mmondell          #+#    #+#              #
-#    Updated: 2022/02/28 08:48:13 by aguay            ###   ########.fr        #
+#    Updated: 2022/03/07 08:45:51 by aguay            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,10 @@ LIBFT_OBJ		= libft/obj/
 LIBFT_INC		= libft/includes/
 
 ## ----- SOURCE FILES ----- ##
-SRCS_FILES		=				\
-			main.c				\
+SRCS_FILES		=					\
+			main.c					\
+			init_command_list.c		\
+			exec_command.c			\
 
 ## ----- .C TO .O CONVERT ----- ##
 OBJ_FILES		= $(SRCS_FILES:.c=.o)
