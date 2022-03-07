@@ -6,28 +6,46 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/07 08:57:58 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/07 10:58:04 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "pipex.h"
 
+char	*get_path(char **envp)
+{
+	int		i;
+	char	*path;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (envp[i][0] == 'P' && envp[i][1] == 'A'
+			&& envp[i][2] == 'T' && envp[i][3] == 'h')
+		{
+			path = strdup(envp[i]);
+			return (path);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
 //	Execute the command entered. If there is a problem,
 //	do nothing and return.
 void	execute_command(t_command *command, char **envp)
 {
-	int	i;
+	char	*path;
 
-	i = 0;
 	if (command->cmd == NULL)
 		return;
-	ft_printf("Command = %s\n", command->cmd);
-	if (command->arg != NULL)
-		ft_printf("Arguments = %s\n", command->arg);
-	ft_printf("Environnement parameters : \n");
-	while (envp[i])
-		ft_printf("%s\n", envp[i++]);
+	path = get_path(envp);
+	if (path != NULL)
+	{
+		ft_printf("%s\n", path);
+		free(path);
+	}
 }
 
 // void	execute_command(char **argv, char *cmd)

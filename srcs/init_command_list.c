@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/07 08:57:19 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/07 10:41:44 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	initialise_command_list(t_command_list *l, int argc, char **argv)
 	l->start->arg = get_arg(argv[1]);
 	temp = l->start;
 	i = 2;
-	ft_printf("argc = %d\n", argc);
 	while (i < argc)
 	{
 		temp->next = malloc(sizeof(t_command));
