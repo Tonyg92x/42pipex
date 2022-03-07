@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/07 08:47:08 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/07 13:15:35 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ typedef struct command
 {
 	struct command	*next;
 	struct command	*prev;
-	char			*cmd;
-	char			*arg;
+	char			**cmd;
 }								t_command;
 
 typedef struct command_list
