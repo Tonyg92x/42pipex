@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/07 13:20:08 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/09 14:05:31 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ void	initialise_command_list(t_command_list *l, int argc, char **argv)
 
 	l->start = malloc(sizeof(t_command));
 	l->start->prev = NULL;
-	l->start->cmd = ft_split(argv[1], ' ');
+	l->start->cmd = ft_split(argv[2], ' ');
+	l->len = 1;
 	temp = l->start;
-	i = 2;
-	while (i < argc)
+	i = 3;
+	while (i < argc - 1)
 	{
 		temp->next = malloc(sizeof(t_command));
 		temp->next->prev = temp;
 		temp = temp->next;
 		temp->cmd = ft_split(argv[i], ' ');
+		l->len++;
 		i++;
 	}
 }

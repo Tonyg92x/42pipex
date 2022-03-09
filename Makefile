@@ -6,7 +6,7 @@
 #    By: aguay <aguay@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/31 08:51:26 by mmondell          #+#    #+#              #
-#    Updated: 2022/03/07 08:45:51 by aguay            ###   ########.fr        #
+#    Updated: 2022/03/09 11:30:12 by aguay            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,6 @@ SRCS_FILES		=					\
 OBJ_FILES		= $(SRCS_FILES:.c=.o)
 
 ## ----- ADDPREFIX TO FILES ----- ##
-# MAIN PROGRAMM #
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS			= $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 VPATH			= $(SRCS_DIR) 
@@ -68,7 +67,6 @@ LIBFT			= make -C $(LIBFT_DIR)
 
 ## ----- ALL ACTION DEPENDENCIES AND RECIPE FOR MAIN PROGRAM ----- ##
 all: obj $(NAME)
-	rm -rf obj
 	clear
 	@echo "$(GREEN)Compilation Completed Successfully$(NORMAL)"
 
