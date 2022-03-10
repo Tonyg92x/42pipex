@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 10:52:48 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 13:06:34 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,37 @@ void	execute_command(t_command *command, char **envp, int *fd)
 	char	*path;
 	char	*temp;
 	int		fd_temp;
+	int		id;
 
 	if (command->cmd == NULL)
 		return ;
-	fd_temp = dup(fd[0]);
-	close(fd[0]);
-	dup2(fd_temp, 0);
-	path = get_path(envp, command);
-	if (path != NULL)
+	id = fork();
+	if (id == 0)
 	{
-		temp = ft_strjoin(path, command->cmd[0]);
-		free(path);
-		path = temp;
-		if (execve(path, command->cmd, envp) == -1)
+		fd_temp= dup(fd[0]);
+		close(fd[0]);
+		dup2(fd_temp, 0);
+		path = get_path(envp, command);
+		if (path != NULL)
 		{
-			ft_printf("Error : Unable to execute the command.\n");
+			temp = ft_strjoin(path, command->cmd[0]);
+			free(path);
+			path = temp;
+			if (execve(path, command->cmd, envp) == -1)
+			{
+				ft_printf("Error : Unable to execute the command.\n");
+				exit(0);
+			}
+			free(path);
+		}
+		else
+		{
+			ft_printf("Error while trying to look for a valid path ");
+			ft_printf("for the command '%s'.\n", command->cmd[0]);
 			exit(0);
 		}
-		free(path);
 	}
 	else
-	{
-		ft_printf("Error while trying to look for a valid path ");
-		ft_printf("for the command '%s'.\n", command->cmd[0]);
-		exit(0);
-	}
+		wait(&id);
+	path = get_path(envp, command);
 }
