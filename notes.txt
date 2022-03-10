@@ -59,3 +59,4 @@ strerror :	The C library function char *strerror(int errnum) searches an interna
 exit :		The C library function void exit(int status) terminates the calling process immediately. Any open file descriptors belonging
 			to the process are closed and any children of the process are inherited by process 1, init, and the process parent is sent a
 			SIGCHLD signal.
+	dup2(open(argv[argc - 1], O_WRONLY | O_CREAT, 0777), 1);

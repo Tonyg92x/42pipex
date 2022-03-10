@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/09 14:17:57 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 09:13:28 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ void	execute_command(t_command *command, char **envp)
 	{
 		ft_printf("Error while trying to look for a valid path ");
 		ft_printf("for the command '%s'.\n", command->cmd[0]);
+		exit(0);
 	}
 }

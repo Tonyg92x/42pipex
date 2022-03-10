@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/09 14:38:01 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:04:22 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,32 +32,18 @@ static void	print_commands(t_command_list *l)
 }
 
 //	Fonction to validate if the file is openable.
-static bool	validate_file(char	*file, char option)
+static bool	validate_file(char	*file)
 {
 	int	fd;
 
-	if (option == 'r')
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
 	{
-		fd = open(file, O_RDONLY);
-		if (fd == -1)
-		{
-			perror("Error on opening the file to read");
-			return (false);
-		}
-		else
-			close(fd);
+		perror("Error on opening the file to read");
+		return (false);
 	}
-	else if (option == 'w')
-	{
-		fd = open(file, O_WRONLY);
-		if (fd == -1)
-		{
-			perror("Error on opening the file to write");
-			return (false);
-		}
-		else
-			close(fd);
-	}
+	else
+		close(fd);
 	return (true);
 }
 
@@ -70,8 +56,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 4)
 		return (0);
-	if (validate_file(argv[1], 'r') == false
-		|| validate_file(argv[argc - 1], 'w') == false)
+	if (validate_file(argv[1]) == false)
 		return (1);
 	if (pipe(fd) == -1)
 	{
@@ -82,14 +67,31 @@ int	main(int argc, char **argv, char **envp)
 	initialise_command_list(list, argc, argv);
 	print_commands(list);
 	temp = list->start;
-	dup2(open(argv[1], O_RDONLY), fd[0]);
-	while (list->len > 0)
+	dup2(open(argv[1], O_RDONLY), 0);
+	while (list->len > 1)
 	{
 		id = fork();
 		if (id == 0)
+		{
+			dup2(fd[0], 1);
 			execute_command(temp, envp);
+		}
+		else
+			wait(&id);
+		close(0);
+		dup2(fd[0], 0);
 		temp = temp->next;
 		list->len--;
+	}
+	if (list->len == 1)
+	{
+		dup2(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777), 1);
+		id = fork();
+		if (id == 0)
+			execute_command(temp, envp);
+		else
+			wait(&id);
+		close(1);
 	}
 	free_command_list(list);
 }
