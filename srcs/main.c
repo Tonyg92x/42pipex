@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 15:12:56 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:22:01 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,19 @@ static void	print_commands(t_command_list *l)
 }
 
 //	Fonction to validate if the file is openable.
-static bool	validate_file(char	*file)
+static bool	validate_file(char	*input, char *output)
 {
 	int	fd;
 
-	fd = open(file, O_RDONLY);
+	fd = open(output, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd == -1)
+	{
+		ft_printf("Can't open or create the output file.");
+		return (false);
+	}
+	else
+		close(fd);
+	fd = open(input, O_RDONLY);
 	if (fd == -1)
 	{
 		perror("Error on opening the file to read");
@@ -55,7 +63,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 4)
 		return (0);
-	if (validate_file(argv[1]) == false)
+	if (validate_file(argv[1], argv[argc - 1]) == false)
 		return (1);
 	if (pipe(fd) == -1)
 	{

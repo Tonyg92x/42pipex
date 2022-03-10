@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 15:07:36 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:20:47 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	execute_command(t_command *command, char **envp, int *fd)
 {
 	char	*path;
 	char	*temp;
-	// int		fd_temp;
 	int		id;
 
 	if (command->cmd == NULL)
