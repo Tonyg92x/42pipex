@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 13:06:34 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:07:36 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,15 @@ void	execute_command(t_command *command, char **envp, int *fd)
 {
 	char	*path;
 	char	*temp;
-	int		fd_temp;
+	// int		fd_temp;
 	int		id;
 
 	if (command->cmd == NULL)
 		return ;
 	id = fork();
+	close(fd[1]);
 	if (id == 0)
 	{
-		fd_temp= dup(fd[0]);
-		close(fd[0]);
-		dup2(fd_temp, 0);
 		path = get_path(envp, command);
 		if (path != NULL)
 		{
@@ -122,5 +120,4 @@ void	execute_command(t_command *command, char **envp, int *fd)
 	}
 	else
 		wait(&id);
-	path = get_path(envp, command);
 }

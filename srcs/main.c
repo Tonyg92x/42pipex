@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 13:19:09 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 15:12:56 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,19 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	if (pipe(fd) == -1)
 	{
-		ft_printf("An error occured whit openning the pipe.\n");
+		ft_printf("An error occured whith openning the pipe.\n");
 		return (2);
 	}
 	list = malloc(sizeof(t_command_list));
 	initialise_command_list(list, argc, argv);
 	print_commands(list);
 	temp = list->start;
-	dup2(open(argv[1], O_RDONLY), fd[0]);
+	dup2(open(argv[1], O_RDONLY), 0);
 	while (list->len > 1)
 	{
+		dup2(fd[1], 1);
 		execute_command(temp, envp, fd);
+		dup2(fd[0], 0);
 		temp = temp->next;
 		list->len--;
 	}
