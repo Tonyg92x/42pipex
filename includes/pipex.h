@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 08:48:41 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:36:03 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ char	*get_cmd(char *string);
 char	*get_arg(char *string);
 void	initialise_command_list(t_command_list *l, int argc, char **argv);
 void	free_command_list(t_command_list *l);
-void	execute_command(t_command *command, char **envp);
+void	execute_command(t_command *command, char **envp, int *fd);
 #endif

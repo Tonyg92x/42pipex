@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 09:13:28 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:52:48 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,17 @@ static char	*get_path(char **envp, t_command *command)
 
 //	Execute the command entered. If there is a problem,
 //	do nothing and return.
-void	execute_command(t_command *command, char **envp)
+void	execute_command(t_command *command, char **envp, int *fd)
 {
 	char	*path;
 	char	*temp;
+	int		fd_temp;
 
 	if (command->cmd == NULL)
 		return ;
+	fd_temp = dup(fd[0]);
+	close(fd[0]);
+	dup2(fd_temp, 0);
 	path = get_path(envp, command);
 	if (path != NULL)
 	{
@@ -99,7 +103,10 @@ void	execute_command(t_command *command, char **envp)
 		free(path);
 		path = temp;
 		if (execve(path, command->cmd, envp) == -1)
+		{
 			ft_printf("Error : Unable to execute the command.\n");
+			exit(0);
+		}
 		free(path);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 10:04:22 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/10 10:41:06 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,15 @@ int	main(int argc, char **argv, char **envp)
 	initialise_command_list(list, argc, argv);
 	print_commands(list);
 	temp = list->start;
-	dup2(open(argv[1], O_RDONLY), 0);
+	dup2(open(argv[1], O_RDONLY), fd[0]);
 	while (list->len > 1)
 	{
 		id = fork();
 		if (id == 0)
-		{
-			dup2(fd[0], 1);
-			execute_command(temp, envp);
-		}
+			execute_command(temp, envp, fd);
 		else
 			wait(&id);
-		close(0);
-		dup2(fd[0], 0);
+		dup2(fd[1], fd[0]);
 		temp = temp->next;
 		list->len--;
 	}
@@ -88,10 +84,9 @@ int	main(int argc, char **argv, char **envp)
 		dup2(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777), 1);
 		id = fork();
 		if (id == 0)
-			execute_command(temp, envp);
+			execute_command(temp, envp, fd);
 		else
 			wait(&id);
-		close(1);
 	}
 	free_command_list(list);
 }
