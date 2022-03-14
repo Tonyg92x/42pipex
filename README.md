@@ -36,7 +36,7 @@
 ## About The Project
 
 <p align="left">
-  Yo
+  Program that need to do the equivalent of "< file1 cmd1 | cmd2 > file2" on taking arguments like that : ./pipex file1 cmd1 cmd2 file2. Basically, you take what is in file1, and use it as an entry for the command 1. Then the output of command 1 fo as the entry of cmd2, until there is no command left then send the output of it into the file at the end. If the file1 dosen't exist, don't run the program. If the last file dosen't exist, create it. If it does exist, replace its content with the output.
   
 
   <!-- INSTALLATION -->
@@ -45,7 +45,7 @@ Use this command to clone the repository :
 ```markdown
 git clone git@github.com:Tonyg92x/42Pipex.git
 ```
-Then you can go in the folder and write the command "make" to compile the library and everything needed for the program. The executable is named pipex. You can test the program using "./pipex x cmd cmd cmd y" where x is the file that is taken as first entry and y the file that the will contain the output.
+Then you can go in the folder and write the command "make" to compile the library and everything needed for the program. The executable is named pipex. You can test the program using "./pipex x cmd cmd cmd y" where x is the file that is taken as first entry and y the file that the will contain the output. cmd are any command that you can use in your unix environnement.
  
 <!-- Authors -->
 ## Authors
