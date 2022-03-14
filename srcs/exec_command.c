@@ -6,7 +6,7 @@
 /*   By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/14 10:53:01 by tonyg            ###   ########.fr       */
+/*   Updated: 2022/03/14 11:10:45 by tonyg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static char	*get_path(char **envp, t_command *command)
 	char	*retour;
 
 	i = 0;
+	if (access(command->cmd[0], F_OK) == 0)
+		return (strdup(command->cmd[0]));
 	while (envp[i])
 	{
 		if (envp[i][0] == 'P' && envp[i][1] == 'A'
@@ -71,11 +73,9 @@ static char	*get_path(char **envp, t_command *command)
 			path = ft_split(&envp[i][5], ':');
 			add_backslash(path);
 			retour = working_path(path, i, command);
+			ft_free2d(path);
 			if (retour == NULL)
-			{
-				ft_free2d(path);
 				return (NULL);
-			}
 			else
 				return (retour);
 		}
@@ -91,6 +91,7 @@ void	execute_command(t_command *command, char **envp, int *fd)
 	char	*path;
 	char	*temp;
 	int		id;
+	char	retour_stack[400];
 
 	if (command->cmd == NULL)
 		return ;
@@ -103,17 +104,14 @@ void	execute_command(t_command *command, char **envp, int *fd)
 		{
 			temp = ft_strjoin(path, command->cmd[0]);
 			free(path);
-			path = temp;
-			if (execve(path, command->cmd, envp) == -1)
-			{
+			ft_strlcpy(retour_stack, temp, ft_strlen(temp));
+			free(temp);
+			if (execve(retour_stack, command->cmd, envp) == -1)
 				exit(0);
-			}
-			free(path);
 		}
 		else
 		{
-			ft_printf("Error while trying to look for a valid path ");
-			ft_printf("for the command '%s'.\n", command->cmd[0]);
+			perror("exec :");
 			exit(0);
 		}
 	}
