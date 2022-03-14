@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 15:22:01 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/14 10:54:43 by tonyg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,6 @@ int	main(int argc, char **argv, char **envp)
 		return (0);
 	if (validate_file(argv[1], argv[argc - 1]) == false)
 		return (1);
-	if (pipe(fd) == -1)
-	{
-		ft_printf("An error occured whith openning the pipe.\n");
-		return (2);
-	}
 	list = malloc(sizeof(t_command_list));
 	initialise_command_list(list, argc, argv);
 	print_commands(list);
@@ -77,6 +72,11 @@ int	main(int argc, char **argv, char **envp)
 	dup2(open(argv[1], O_RDONLY), 0);
 	while (list->len > 1)
 	{
+		if (pipe(fd) == -1)
+		{
+			ft_printf("An error occured whith openning the pipe.\n");
+			return (2);
+		}
 		dup2(fd[1], 1);
 		execute_command(temp, envp, fd);
 		dup2(fd[0], 0);

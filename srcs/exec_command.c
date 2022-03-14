@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 15:28:36 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/14 10:53:01 by tonyg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static char	*working_path(char **path, int i, t_command *command)
 	char	*retour;
 	char	*path_command;
 
+	i = 0;
 	while (true)
 	{
 		if (path[i] == NULL)
@@ -68,7 +69,7 @@ static char	*get_path(char **envp, t_command *command)
 			&& envp[i][2] == 'T' && envp[i][3] == 'H' && envp[i][4] == '=')
 		{
 			path = ft_split(&envp[i][5], ':');
-			path = add_backslash(path);
+			add_backslash(path);
 			retour = working_path(path, i, command);
 			if (retour == NULL)
 			{
