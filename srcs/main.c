@@ -6,7 +6,7 @@
 /*   By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/14 10:54:43 by tonyg            ###   ########.fr       */
+/*   Updated: 2022/03/14 12:14:17 by tonyg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	validate_file(char	*input, char *output)
 	fd = open(output, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 	{
-		ft_printf("Can't open or create the output file.");
+		perror("Error on opening the last file :");
 		return (false);
 	}
 	else
@@ -47,7 +47,7 @@ static bool	validate_file(char	*input, char *output)
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error on opening the file to read");
+		perror("Error on opening the first file");
 		return (false);
 	}
 	else
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		if (pipe(fd) == -1)
 		{
-			ft_printf("An error occured whith openning the pipe.\n");
+			perror("Pipe Error");
 			return (2);
 		}
 		dup2(fd[1], 1);

@@ -6,7 +6,7 @@
 /*   By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/14 11:10:45 by tonyg            ###   ########.fr       */
+/*   Updated: 2022/03/14 12:17:13 by tonyg            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	execute_command(t_command *command, char **envp, int *fd)
 		}
 		else
 		{
-			perror("exec :");
+			perror("exec error");
 			exit(0);
 		}
 	}
