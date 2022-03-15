@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/14 12:17:13 by tonyg            ###   ########.fr       */
+/*   Updated: 2022/03/15 07:57:08 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static char	*working_path(char **path, int i, t_command *command)
 		if (access(path_command, F_OK) == 0)
 		{
 			retour = ft_strdup(path[i]);
-			ft_free2d(path);
 			free(path_command);
 			return (retour);
 		}
@@ -71,7 +70,7 @@ static char	*get_path(char **envp, t_command *command)
 			&& envp[i][2] == 'T' && envp[i][3] == 'H' && envp[i][4] == '=')
 		{
 			path = ft_split(&envp[i][5], ':');
-			add_backslash(path);
+			path = add_backslash(path);
 			retour = working_path(path, i, command);
 			ft_free2d(path);
 			if (retour == NULL)
@@ -84,28 +83,17 @@ static char	*get_path(char **envp, t_command *command)
 	return (NULL);
 }
 
-//	Execute the command entered. If there is a problem,
-//	do nothing and return.
-void	execute_command(t_command *command, char **envp, int *fd)
+static	void	exec_boucle(int *fd, char **envp, char *retour_stack,
+	t_command *command)
 {
-	char	*path;
-	char	*temp;
 	int		id;
-	char	retour_stack[400];
 
-	if (command->cmd == NULL)
-		return ;
 	id = fork();
-	close(fd[1]);
 	if (id == 0)
 	{
-		path = get_path(envp, command);
-		if (path != NULL)
+		close(fd[1]);
+		if (retour_stack[0] != '\0')
 		{
-			temp = ft_strjoin(path, command->cmd[0]);
-			free(path);
-			ft_strlcpy(retour_stack, temp, ft_strlen(temp));
-			free(temp);
 			if (execve(retour_stack, command->cmd, envp) == -1)
 				exit(0);
 		}
@@ -117,4 +105,23 @@ void	execute_command(t_command *command, char **envp, int *fd)
 	}
 	else
 		wait(&id);
+}
+
+//	Execute the command entered. If there is a problem,
+//	do nothing and return.
+void	execute_command(t_command *command, char **envp, int *fd)
+{
+	char	*path;
+	char	*temp;
+	char	retour_stack[400];
+
+	if (command->cmd == NULL)
+		return ;
+	path = get_path(envp, command);
+	temp = ft_strjoin(path, command->cmd[0]);
+	free(path);
+	ft_bzero(retour_stack, sizeof(retour_stack));
+	ft_strlcpy(retour_stack, temp, ft_strlen(temp) + 1);
+	free(temp);
+	exec_boucle(fd, envp, retour_stack, command);
 }
