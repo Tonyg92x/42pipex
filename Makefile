@@ -6,7 +6,7 @@
 #    By: aguay <aguay@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/31 08:51:26 by mmondell          #+#    #+#              #
-#    Updated: 2022/03/15 07:50:15 by aguay            ###   ########.fr        #
+#    Updated: 2022/03/15 08:57:04 by aguay            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME 			= pipex
 
 ## ----- CHOOSE COMPILER AND FLAGS ----- ##
 CC				= gcc
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -g
 
 ## ----- PATH TO FOLDERS ----- ##
 SRCS_DIR		= srcs/
@@ -35,17 +35,24 @@ LIBFT_OBJ		= libft/obj/
 LIBFT_INC		= libft/includes/
 
 ## ----- SOURCE FILES ----- ##
-SRCS_FILES		=					\
-			main.c					\
-			init_command_list.c		\
-			exec_command.c			\
+SRCS_FILES		=						\
+			main.c						\
+			init_command_list.c			\
+			exec_command.c				\
+
+SCRS_B			=						\
+			main_bonus.c				\
+			init_command_list_bonus.c	\
+			exec_command_bonus.c 		\
 
 ## ----- .C TO .O CONVERT ----- ##
 OBJ_FILES		= $(SRCS_FILES:.c=.o)
+OBJ_FILES_B		= $(SCRS_B:.c=.o)
 
 ## ----- ADDPREFIX TO FILES ----- ##
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 OBJS			= $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+OBJS_B			= $(addprefix $(OBJ_DIR), $(OBJ_FILES_B))
 VPATH			= $(SRCS_DIR) 
 
 #--------------------------------------------------------------#
@@ -76,6 +83,11 @@ $(OBJ_DIR)%.o:%.c
 $(NAME): $(OBJS)
 	$(LIBFT)
 	$(CC) $(OBJS) libft/libft.a -o $(NAME)
+
+bonus: obj $(OBJS_B)
+	$(LIBFT)
+	$(CC) $(OBJS_B) libft/libft.a -o pipex_bonus
+
 obj:
 	@mkdir -p $(OBJ_DIR)
 
@@ -83,10 +95,12 @@ obj:
 clean:
 	$(RM) $(OBJS) ##$(B_OBJS)
 	@make -C $(LIBFT_DIR) clean
+	rm -rf obj
 	clear
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f pipex_bonus
 	@make -C $(LIBFT_DIR) fclean
 	clear
 

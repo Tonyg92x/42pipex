@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   exec_command_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/15 09:03:36 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/15 09:04:15 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static char	*get_path(char **envp, t_command *command)
 	return (NULL);
 }
 
-//	Fonction to get less line in main.
 static	void	exec_boucle(int *fd, char **envp, char *retour_stack,
 	t_command *command)
 {

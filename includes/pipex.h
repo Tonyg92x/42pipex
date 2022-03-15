@@ -6,13 +6,13 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/10 15:06:29 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/15 09:06:33 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
-	#include <sys/wait.h>
+# include <sys/wait.h>
 
 typedef struct command
 {
