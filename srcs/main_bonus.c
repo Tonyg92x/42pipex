@@ -6,30 +6,12 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/15 07:53:42 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/16 08:04:51 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "pipex.h"
-
-//	Print out the command entered, usage for verification.
-static void	print_commands(t_command_list *l)
-{
-	t_command	*temp;
-	int			i;
-
-	temp = l->start;
-	while (temp != NULL)
-	{
-		i = 1;
-		ft_printf("CMD = %s", temp->cmd[0]);
-		while (temp->cmd[i] != NULL)
-			ft_printf(" %s", temp->cmd[i++]);
-		ft_printf("\n");
-		temp = temp->next;
-	}
-}
 
 //	Fonction to validate if the file is openable.
 static bool	validate_file(char	*input, char *output)
@@ -97,7 +79,6 @@ int	main(int argc, char **argv, char **envp)
 		free_command_list(list);
 		return (0);
 	}
-	print_commands(list);
 	ft_pipex(list, argv, envp, argc);
 	free_command_list(list);
 }

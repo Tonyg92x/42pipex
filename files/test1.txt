@@ -1,5 +1,0 @@
-/Users/aguay/Documents/Projects/42pipex/files
-A 
-get_path
-valid
-Makefile
