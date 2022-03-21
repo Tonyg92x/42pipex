@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/21 07:09:38 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/21 13:51:09 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ static char	*get_path(char **envp, t_command *command)
 
 //	Fonction to get less line in main.
 static	void	exec_boucle(int *fd, char **envp, char *retour_stack,
-	t_command *command)
+	t_command *command) // I have to free my command lists in each child.
 {
-	int	id;
+	int		id;
 
 	id = fork();
 	if (id == 0)
