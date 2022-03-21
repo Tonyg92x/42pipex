@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/21 13:50:44 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/21 14:36:57 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	ft_pipex(t_command_list *list, char **argv, char **envp, int argc)
 			return ;
 		}
 		dup2(fd[1], 1);
-		execute_command(temp, envp, fd);
+		execute_command(temp, envp, fd, list);
 		dup2(fd[0], 0);
 		close(fd[0]);
 		close(fd[1]);
@@ -62,7 +62,7 @@ static void	ft_pipex(t_command_list *list, char **argv, char **envp, int argc)
 	if (list->len == 1)
 	{
 		dup2(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777), 1);
-		execute_command(temp, envp, fd);
+		execute_command(temp, envp, fd, list);
 	}
 }
 
