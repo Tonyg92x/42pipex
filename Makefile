@@ -6,7 +6,7 @@
 #    By: aguay <aguay@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/31 08:51:26 by mmondell          #+#    #+#              #
-#    Updated: 2022/03/15 08:57:04 by aguay            ###   ########.fr        #
+#    Updated: 2022/03/21 07:28:52 by aguay            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,8 @@ $(NAME): $(OBJS)
 bonus: obj $(OBJS_B)
 	$(LIBFT)
 	$(CC) $(OBJS_B) libft/libft.a -o pipex_bonus
+	clear
+	@echo "$(GREEN)Compilation Completed Successfully$(NORMAL)"
 
 obj:
 	@mkdir -p $(OBJ_DIR)
