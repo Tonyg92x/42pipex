@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/22 10:30:30 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/22 10:39:21 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_command_list	*list;
 
-	if (argc != 5)
+	if (argc < 5)
 	{
-		ft_putstr_fd("The program need exactly 4 arguments.\n", 2);
+		ft_putstr_fd("The program need at least 4 arguments.\n", 2);
 		return (0);
 	}
 	if (validate_file(argv[1], argv[argc - 1]) == false)
