@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/22 10:39:21 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/22 10:43:36 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,6 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	list = malloc(sizeof(t_command_list));
 	initialise_command_list(list, argc, argv);
-	if (list->len != 2)
-	{
-		free_command_list(list);
-		return (0);
-	}
 	ft_pipex(list, argv, envp, argc);
 	free_command_list(list);
 }
