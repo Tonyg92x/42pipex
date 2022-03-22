@@ -6,7 +6,7 @@
 #    By: aguay <aguay@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/31 08:51:26 by mmondell          #+#    #+#              #
-#    Updated: 2022/03/22 10:26:17 by aguay            ###   ########.fr        #
+#    Updated: 2022/03/22 10:37:55 by aguay            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,8 +74,6 @@ LIBFT			= make -C $(LIBFT_DIR)
 
 ## ----- ALL ACTION DEPENDENCIES AND RECIPE FOR MAIN PROGRAM ----- ##
 all: obj $(NAME)
-	clear
-	@echo "$(GREEN)Compilation Completed Successfully$(NORMAL)"
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(CFLAGS) -I $(LIBFT_OBJ) -I $(INCLUDE_DIR) -I $(LIBFT_INC) -o $@ -c $<
@@ -87,24 +85,20 @@ $(NAME): $(OBJS)
 bonus: obj $(OBJS_B)
 	$(LIBFT)
 	$(CC) $(OBJS_B) libft/libft.a -o pipex_bonus
-	clear
-	@echo "$(GREEN)Compilation Completed Successfully$(NORMAL)"
 
 obj:
 	@mkdir -p $(OBJ_DIR)
 
 ## ----- CLEAN COMMANDS ----- ##
 clean:
-	$(RM) $(OBJS) ##$(B_OBJS)
+	$(RM) $(OBJS) $(B_OBJS)
 	@make -C $(LIBFT_DIR) clean
 	rm -rf obj
-	clear
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f pipex_bonus
 	@make -C $(LIBFT_DIR) fclean
-	clear
 
 re: fclean all
 

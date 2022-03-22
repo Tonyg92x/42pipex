@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tonyg <tonyg@student.42.fr>                +#+  +:+       +#+         #
+#    By: aguay <aguay@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/31 08:51:26 by mmondell          #+#    #+#              #
-#    Updated: 2022/02/28 08:44:57 by aguay            ###   ########.fr        #
+#    Updated: 2022/03/22 10:37:26 by aguay            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,8 +104,6 @@ NORMAL 			= \033[0m
 
 ## ----- ALL ACTION DEPENDENCIES AND RECIPE FOR MAIN PROGRAM ----- ##
 all: obj $(NAME)
-	clear
-	@echo "$(GREEN)Compilation Completed Successfully$(NORMAL)"
 
 $(OBJ_DIR)%.o:%.c
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -o $@ -c $<
@@ -113,8 +111,8 @@ $(OBJ_DIR)%.o:%.c
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
+
 obj:
-	@clear
 	@echo "$(RED) Making TonyG C library $(AQUA)"
 	@mkdir -p $(OBJ_DIR)
 
@@ -122,7 +120,7 @@ obj:
 clean:
 	$(RM) $(OBJS) $(B_OBJS)
 	@rm -rf $(OBJ_DIR)
-	clear
+
 fclean: clean
 	@rm -f $(NAME)
 
