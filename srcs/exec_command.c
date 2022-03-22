@@ -6,7 +6,7 @@
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/21 14:45:32 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/22 10:24:08 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,27 +85,18 @@ static char	*get_path(char **envp, t_command *command)
 
 //	Fonction to get less line in main.
 static	void	exec_boucle(int *fd, char **envp, char *retour_stack,
-	t_command *command, t_command_list *list)
+	t_command *command)
 {
 	int		id;
-	int		i;
-	char	cmd[99999][99999];
 
-	i = 0;
-	while (i < list->len)
-	{
-		ft_strlcpy(cmd[i], command->cmd[i], ft_strlen(command->cmd[i]) + 1);
-		ft_putstr_fd(cmd[i], 2);
-		i++;
-	}
 	id = fork();
 	if (id == 0)
 	{
-		free_command_list(list);
 		close(fd[1]);
 		if (execve(retour_stack, command->cmd, envp) == -1)
 		{
 			ft_putstr_fd("execve : command not found\n", 2);
+			free(command);
 			exit(0);
 		}
 	}
@@ -115,7 +106,7 @@ static	void	exec_boucle(int *fd, char **envp, char *retour_stack,
 
 //	Execute the command entered. If there is a problem,
 //	do nothing and return.
-void	execute_command(t_command *command, char **envp, int *fd, t_command_list *list)
+void	execute_command(t_command *command, char **envp, int *fd)
 {
 	char	*path;
 	char	*temp;
@@ -130,5 +121,5 @@ void	execute_command(t_command *command, char **envp, int *fd, t_command_list *l
 	if (temp != NULL)
 		ft_strlcpy(retour_stack, temp, ft_strlen(temp) + 1);
 	free(temp);
-	exec_boucle(fd, envp, retour_stack, command, list); // segfault here, probably cause im getting command and list as argument and i have 5 args.
+	exec_boucle(fd, envp, retour_stack, command);
 }
