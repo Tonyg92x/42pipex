@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_command.c                                     :+:      :+:    :+:   */
+/*   exec_command_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguay <aguay@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 09:25:02 by aguay             #+#    #+#             */
-/*   Updated: 2022/03/22 10:24:08 by aguay            ###   ########.fr       */
+/*   Updated: 2022/03/23 08:55:24 by aguay            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,12 @@ void	execute_command(t_command *command, char **envp, int *fd)
 	if (temp != NULL)
 		ft_strlcpy(retour_stack, temp, ft_strlen(temp) + 1);
 	free(temp);
-	exec_boucle(fd, envp, retour_stack, command);
+	if (retour_stack[0] != '\0')
+		exec_boucle(fd, envp, retour_stack, command);
+	else
+	{
+		ft_putstr_fd("Command not found : ", 2);
+		ft_putstr_fd(command->cmd[0], 2);
+		ft_putstr_fd("\n", 2);
+	}
 }
